@@ -21,7 +21,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="카운터" id="vd1-8A-sf4">
-                                        <barButtonItem key="leftBarButtonItem" image="line.3.horizontal" catalog="system" id="ljL-Ya-qRg"/>
+                                        <barButtonItem key="leftBarButtonItem" image="line.3.horizontal" catalog="system" id="ljL-Ya-qRg">
+                                            <connections>
+                                                <action selector="clickSettingWithSender:" destination="BYZ-38-t0r" id="nff-Vm-MeH"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" image="slider.horizontal.3" catalog="system" id="WnY-go-TvB"/>
                                     </navigationItem>
                                 </items>
@@ -41,6 +45,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnSetting" destination="ljL-Ya-qRg" id="45D-RT-cCZ"/>
                         <outlet property="lblCount" destination="G2o-Vw-Utk" id="kuV-Ho-A6j"/>
                     </connections>
                 </viewController>

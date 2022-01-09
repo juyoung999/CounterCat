@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet var lblCount: UILabel!
+    @IBOutlet var btnSetting: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,18 @@ class ViewController: UIViewController {
         
         lblCount.text = String(Int(lblCount.text!)! + 1)
     }
+    
+    @IBAction func clickSetting(sender: UIBarButtonItem){
+        let settindAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        settindAlert.addAction(UIAlertAction(title: "카운트다운", style: .default))
+        settindAlert.addAction(UIAlertAction(title: "카운트", style: .default))
+        settindAlert.addAction(UIAlertAction(title: "설정", style: .default))
+        settindAlert.addAction(UIAlertAction(title: "취소", style: .cancel))
+        
+        present(settindAlert, animated: true)
+    }
+    
  /*
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var stepper: UIStepper!
