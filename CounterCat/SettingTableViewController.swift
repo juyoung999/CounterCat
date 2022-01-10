@@ -10,6 +10,10 @@ import UIKit
 class SettingTableViewController: UITableViewController {
 
     @IBOutlet var optPicker: UIPickerView!
+    @IBOutlet var bbtnComplete: UIBarButtonItem!
+    
+    var touchOption = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +22,7 @@ class SettingTableViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-         self.navigationItem.rightBarButtonItem = self.editButtonItem
+       //  self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -31,6 +35,13 @@ class SettingTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 3
+    }
+    
+    @IBAction func setComplete(sender: UIBarButtonItem){
+        
+        performSegue(withIdentifier: touchOption, sender: self)
+        self.dismiss(animated: true, completion: nil)
+        
     }
 
     /*
@@ -78,15 +89,18 @@ class SettingTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sgCountDown"{
+            let ff = segue.destination as! CountDownViewController
+        }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }
 
@@ -107,7 +121,9 @@ extension SettingTableViewController: UIPickerViewDelegate, UIPickerViewDataSour
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
+        if row == 1{
+            touchOption = "sgCountDown"
+        }
     }
 }
 

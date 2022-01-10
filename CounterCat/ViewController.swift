@@ -6,25 +6,46 @@
 //
 
 import UIKit
+import AudioToolbox
 
 class ViewController: UIViewController {
 
     @IBOutlet var lblCount: UILabel!
-    @IBOutlet var bbtnSetting: UIBarButtonItem!
-    @IBOutlet var bbtnOption: UIBarButtonItem!
-    @IBOutlet var btnsetting: UIButton!
-    @IBOutlet var btnReste: UIButton!
+    @IBOutlet var bbtnsetting: UIBarButtonItem!
+    @IBOutlet var bbtnReset: UIBarButtonItem!
+    
+    var vibrate = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        let slideUp = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.slideScreen(_:)))
+        slideUp.direction = UISwipeGestureRecognizer.Direction.up
+        self.view.addGestureRecognizer(slideUp)
+        
+        let slideDown = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.slideScreen(_:)))
+        slideDown.direction = UISwipeGestureRecognizer.Direction.down
+        self.view.addGestureRecognizer(slideDown)
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    @objc func slideScreen(_ gesture: UISwipeGestureRecognizer){
+        if gesture.direction == UISwipeGestureRecognizer.Direction.up{
+                lblCount.text = String(Int(lblCount.text!)! + 1)
+        }else{
+            lblCount.text = String(Int(lblCount.text!)! - 1)
+        }
+    }
+ /*   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         //let touch = touches.count
         
         lblCount.text = String(Int(lblCount.text!)! + 1)
+        if vibrate{
+            AudioServicesPlaySystemSound(1520)
+        }
     }
+   */
+
     
     @IBAction func clickSetting(sender: UIBarButtonItem){
         let settindAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -45,33 +66,9 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sgDown"{
-            let countDownView = segue.destination as! CountDownViewController
-            
-            countDownView.modalPresentationStyle = .fullScreen
+            let countdown = segue.destination as! CountDownViewController
         }
     }
- /*
-    @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var stepper: UIStepper!
-    @IBOutlet weak var reset: UIButton!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        stepper.transform = stepper.transform.scaledBy(x: 3.3, y: 2.8)
-        stepper.maximumValue = 1000
-    }
-
-    @IBAction func updownStepper(_ sender: UIStepper) {
-        label.text = Int(sender.value).description
-        AudioServicesPlaySystemSound(1520)
-    }
  
-    @IBAction func reset(_ sender: UIButton){
-        label.text = "0"
-        stepper.value = Double(0)
-        AudioServicesPlaySystemSound(1520)
-    }
-*/
 }
 

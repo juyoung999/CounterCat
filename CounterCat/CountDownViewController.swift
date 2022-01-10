@@ -9,21 +9,26 @@ import UIKit
 
 class CountDownViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+       @IBOutlet weak var lblCount: UILabel!
+       @IBOutlet weak var stepper: UIStepper!
+       @IBOutlet weak var reset: UIButton!
+       
+       override func viewDidLoad() {
+           super.viewDidLoad()
+           // Do any additional setup after loading the view.
+           stepper.transform = stepper.transform.scaledBy(x: 3.0, y: 2.5)
+           stepper.maximumValue = 1000
+       }
 
-        // Do any additional setup after loading the view.
-    }
+       @IBAction func updownStepper(_ sender: UIStepper) {
+           lblCount.text = Int(sender.value).description
+       //    AudioServicesPlaySystemSound(1520)
+       }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+   /*    @IBAction func reset(_ sender: UIButton){
+           label.text = "0"
+           stepper.value = Double(0)
+           AudioServicesPlaySystemSound(1520)
+       }
+*/
 }
