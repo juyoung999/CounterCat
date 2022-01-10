@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,47 +17,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RYZ-8D-hcd">
-                                <rect key="frame" x="0.0" y="33" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="카운터" id="vd1-8A-sf4">
-                                        <barButtonItem key="leftBarButtonItem" image="line.3.horizontal" catalog="system" id="ljL-Ya-qRg">
-                                            <connections>
-                                                <action selector="clickSettingWithSender:" destination="BYZ-38-t0r" id="nff-Vm-MeH"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="slider.horizontal.3" catalog="system" id="WnY-go-TvB">
-                                            <connections>
-                                                <segue destination="ghU-uS-qh5" kind="show" id="918-5i-D5G"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G2o-Vw-Utk">
                                 <rect key="frame" x="161.5" y="358.5" width="91" height="179.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="150"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="snr-eX-zTf">
-                                <rect key="frame" x="357" y="86" width="48" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="arrow.clockwise" catalog="system"/>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="muK-Ub-Bu7">
+                                <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5S0-fr-lZQ">
+                                        <rect key="frame" x="0.0" y="9.5" width="45.5" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="gearshape.fill" catalog="system"/>
+                                        <connections>
+                                            <segue destination="ghU-uS-qh5" kind="show" id="VPc-sr-BUM"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="snr-eX-zTf">
+                                        <rect key="frame" x="371" y="9.5" width="43" height="31"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="">
+                                            <imageReference key="image" image="arrow.clockwise" catalog="system" symbolScale="large"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="font">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            </preferredSymbolConfiguration>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="resetCountWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hrs-A9-fyA"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="VWG-nW-cjk"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="muK-Ub-Bu7" secondAttribute="trailing" id="QjK-xP-XfS"/>
                             <constraint firstItem="G2o-Vw-Utk" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Rqf-YQ-CK5"/>
+                            <constraint firstItem="muK-Ub-Bu7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Zvz-UH-96B"/>
+                            <constraint firstItem="muK-Ub-Bu7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="nvW-BO-Hyr"/>
                             <constraint firstItem="G2o-Vw-Utk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="w9d-ss-7Mq"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="bbtnOption" destination="WnY-go-TvB" id="LHc-rL-SBo"/>
-                        <outlet property="bbtnSetting" destination="ljL-Ya-qRg" id="45D-RT-cCZ"/>
+                        <outlet property="btnReste" destination="snr-eX-zTf" id="LO0-gt-a0h"/>
+                        <outlet property="btnsetting" destination="5S0-fr-lZQ" id="dW5-Tr-zRp"/>
                         <outlet property="lblCount" destination="G2o-Vw-Utk" id="kuV-Ho-A6j"/>
                         <segue destination="RQD-k8-Ocw" kind="show" identifier="sgDown" animates="NO" id="zFt-Vf-PKd"/>
                     </connections>
@@ -181,8 +189,7 @@
     </scenes>
     <resources>
         <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
-        <image name="line.3.horizontal" catalog="system" width="128" height="64"/>
-        <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
+        <image name="gearshape.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     @IBOutlet var lblCount: UILabel!
     @IBOutlet var bbtnSetting: UIBarButtonItem!
     @IBOutlet var bbtnOption: UIBarButtonItem!
+    @IBOutlet var btnsetting: UIButton!
+    @IBOutlet var btnReste: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +39,9 @@ class ViewController: UIViewController {
         present(settindAlert, animated: true)
     }
     
+    @IBAction func resetCount(sender: UIButton){
+        lblCount.text = "0"
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sgDown"{
