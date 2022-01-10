@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20471EC8278BBF8C00EDC819 /* CountDownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20471EC7278BBF8C00EDC819 /* CountDownViewController.swift */; };
+		20471ECA278BCE2700EDC819 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20471EC9278BCE2600EDC819 /* SettingTableViewController.swift */; };
 		20CD2E5F278AD4030042489D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CD2E5E278AD4030042489D /* AppDelegate.swift */; };
 		20CD2E61278AD4030042489D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CD2E60278AD4030042489D /* SceneDelegate.swift */; };
 		20CD2E63278AD4030042489D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CD2E62278AD4030042489D /* ViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		20471EC7278BBF8C00EDC819 /* CountDownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownViewController.swift; sourceTree = "<group>"; };
+		20471EC9278BCE2600EDC819 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		20CD2E5B278AD4030042489D /* CounterCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CounterCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20CD2E5E278AD4030042489D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		20CD2E60278AD4030042489D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +62,8 @@
 			children = (
 				20CD2E5E278AD4030042489D /* AppDelegate.swift */,
 				20CD2E60278AD4030042489D /* SceneDelegate.swift */,
+				20471EC9278BCE2600EDC819 /* SettingTableViewController.swift */,
+				20471EC7278BBF8C00EDC819 /* CountDownViewController.swift */,
 				20CD2E62278AD4030042489D /* ViewController.swift */,
 				20CD2E64278AD4030042489D /* Main.storyboard */,
 				20CD2E67278AD4040042489D /* Assets.xcassets */,
@@ -138,9 +144,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20471EC8278BBF8C00EDC819 /* CountDownViewController.swift in Sources */,
 				20CD2E63278AD4030042489D /* ViewController.swift in Sources */,
 				20CD2E5F278AD4030042489D /* AppDelegate.swift in Sources */,
 				20CD2E61278AD4030042489D /* SceneDelegate.swift in Sources */,
+				20471ECA278BCE2700EDC819 /* SettingTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

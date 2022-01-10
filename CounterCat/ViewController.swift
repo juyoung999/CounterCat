@@ -10,7 +10,8 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet var lblCount: UILabel!
-    @IBOutlet var btnSetting: UIBarButtonItem!
+    @IBOutlet var bbtnSetting: UIBarButtonItem!
+    @IBOutlet var bbtnOption: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,15 +26,25 @@ class ViewController: UIViewController {
     
     @IBAction func clickSetting(sender: UIBarButtonItem){
         let settindAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        settindAlert.addAction(UIAlertAction(title: "카운트다운", style: .default))
+     
         settindAlert.addAction(UIAlertAction(title: "카운트", style: .default))
+        settindAlert.addAction(UIAlertAction(title: "카운트다운", style: .default){_ in
+            self.performSegue(withIdentifier: "sgDown", sender: self)
+        })
         settindAlert.addAction(UIAlertAction(title: "설정", style: .default))
         settindAlert.addAction(UIAlertAction(title: "취소", style: .cancel))
         
         present(settindAlert, animated: true)
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sgDown"{
+            let countDownView = segue.destination as! CountDownViewController
+            
+            countDownView.modalPresentationStyle = .fullScreen
+        }
+    }
  /*
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var stepper: UIStepper!
