@@ -17,7 +17,7 @@ class CountDownViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-         navigationController?.setNavigationBarHidden(false, animated: true)
+        // navigationController?.setNavigationBarHidden(false, animated: true)
         stepper.transform = stepper.transform.scaledBy(x: 3.0, y: 2.5)
         stepper.maximumValue = 1000
     }

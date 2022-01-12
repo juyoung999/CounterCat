@@ -8,45 +8,49 @@
 import UIKit
 import AudioToolbox
 
-class ViewController: UIViewController{
-
+class ViewController: UIViewController, CountSlideDelegate{
 
     @IBOutlet var lblCount: UILabel!
     @IBOutlet var bbtnsetting: UIBarButtonItem!
     @IBOutlet var bbtnReset: UIBarButtonItem!
-    
-    var vibrate = true
+
+    var canSlide = false
+    var canTouch = true
+    var vibrate = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         let slideUp = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.slideScreen(_:)))
         let slideDown = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.slideScreen(_:)))
-        
         slideUp.direction = UISwipeGestureRecognizer.Direction.up
         slideDown.direction = UISwipeGestureRecognizer.Direction.down
-        
         self.view.addGestureRecognizer(slideUp)
         self.view.addGestureRecognizer(slideDown)
     }
 
-    
-    
+    func didChangeOption(_ controller: SettingTableViewController, touch: Bool) {
+        canSlide = !touch
+        canTouch = touch
+    }
+
+
     @objc func slideScreen(_ gesture: UISwipeGestureRecognizer){
-        if gesture.direction == UISwipeGestureRecognizer.Direction.up{
-                lblCount.text = String(Int(lblCount.text!)! + 1)
-        }else{
-            lblCount.text = String(Int(lblCount.text!)! - 1)
+        if canSlide{
+            if gesture.direction == UISwipeGestureRecognizer.Direction.up{
+                    lblCount.text = String(Int(lblCount.text!)! + 1)
+            }else{
+                lblCount.text = String(Int(lblCount.text!)! - 1)
+            }
         }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //let touch = touches.count
-        
-        lblCount.text = String(Int(lblCount.text!)! + 1)
-        if vibrate{
-            AudioServicesPlaySystemSound(1520)
+        if canTouch{
+            lblCount.text = String(Int(lblCount.text!)! + 1)
+            if vibrate{
+                AudioServicesPlaySystemSound(1520)
+            }
         }
     }
     
@@ -58,6 +62,7 @@ class ViewController: UIViewController{
 
         if segue.identifier == "sgSetting"{
             let settingController = segue.destination as! SettingTableViewController
+            settingController.delegate = self
         }
     }
  
