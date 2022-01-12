@@ -8,7 +8,7 @@
 import UIKit
 import AudioToolbox
 
-class ViewController: UIViewController, CountOptionDelegate {
+class ViewController: UIViewController{
 
 
     @IBOutlet var lblCount: UILabel!
@@ -31,19 +31,6 @@ class ViewController: UIViewController, CountOptionDelegate {
         self.view.addGestureRecognizer(slideDown)
     }
 
-    func didChangeOption(_ controller: SettingTableViewController, option: Int) {
-        switch option{
-        case 0:
-            break;
-        case 1:
-            performSegue(withIdentifier: "sgDown", sender: self)
-            break;
-        case 2:
-            break;
-        default:
-            break;
-        }
-    }
     
     
     @objc func slideScreen(_ gesture: UISwipeGestureRecognizer){
@@ -68,13 +55,9 @@ class ViewController: UIViewController, CountOptionDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "sgDown"{
-            let countDownView = segue.destination as! CountDownViewController
-            countDownView.modalPresentationStyle = .fullScreen
-        }
+
         if segue.identifier == "sgSetting"{
             let settingController = segue.destination as! SettingTableViewController
-            settingController.delegate = self
         }
     }
  

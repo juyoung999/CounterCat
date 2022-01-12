@@ -48,7 +48,6 @@
                         <outlet property="bbtnReset" destination="D8T-mT-N1Y" id="oVg-g4-S2i"/>
                         <outlet property="bbtnsetting" destination="XB2-FP-l1N" id="YgS-B8-TWe"/>
                         <outlet property="lblCount" destination="G2o-Vw-Utk" id="kuV-Ho-A6j"/>
-                        <segue destination="RQD-k8-Ocw" kind="show" identifier="sgDown" id="hqH-Jy-lmn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -76,7 +75,7 @@
             <objects>
                 <tableViewController id="ghU-uS-qh5" customClass="SettingTableViewController" customModule="CounterCat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="vg5-Xf-x0h">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <sections>
@@ -176,6 +175,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="pwj-5U-L7T">
                         <barButtonItem key="rightBarButtonItem" title="완료" id="3xr-2n-DhX">
+                            <color key="tintColor" systemColor="systemGreenColor"/>
                             <connections>
                                 <action selector="setCompleteWithSender:" destination="ghU-uS-qh5" id="Pjl-3J-iih"/>
                             </connections>
@@ -184,6 +184,7 @@
                     <connections>
                         <outlet property="bbtnComplete" destination="3xr-2n-DhX" id="IGf-Bz-hIj"/>
                         <outlet property="optPicker" destination="d2M-Yh-xfR" id="Aet-3U-f2x"/>
+                        <segue destination="RQD-k8-Ocw" kind="show" identifier="sgCountDown" id="iz0-E0-4fE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="03y-z0-qBt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -195,17 +196,17 @@
             <objects>
                 <viewController title="countdownView" id="RQD-k8-Ocw" customClass="CountDownViewController" customModule="CounterCat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i8f-s7-lJ7">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pq1-Xv-Foj">
-                                <rect key="frame" x="161.5" y="238" width="91" height="179.5"/>
+                                <rect key="frame" x="161.5" y="150" width="91" height="179.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="150"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="WBV-m7-TJ0">
-                                <rect key="frame" x="160" y="680" width="94" height="32"/>
+                                <rect key="frame" x="160" y="626" width="94" height="32"/>
                                 <connections>
                                     <action selector="updownStepper:" destination="RQD-k8-Ocw" eventType="valueChanged" id="D6V-WJ-DHJ"/>
                                 </connections>
@@ -220,18 +221,37 @@
                             <constraint firstItem="WBV-m7-TJ0" firstAttribute="centerX" secondItem="i8f-s7-lJ7" secondAttribute="centerX" id="vEo-nM-hGc"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="J85-TK-wFy"/>
+                    <navigationItem key="navigationItem" id="J85-TK-wFy">
+                        <barButtonItem key="leftBarButtonItem" image="gearshape.fill" catalog="system" id="GR6-R3-CHW">
+                            <color key="tintColor" systemColor="systemGreenColor"/>
+                            <connections>
+                                <segue destination="ghU-uS-qh5" kind="show" id="3bp-HR-OwW"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="arrow.clockwise" catalog="system" id="NAB-EZ-h2a">
+                            <color key="tintColor" systemColor="systemGreenColor"/>
+                            <connections>
+                                <action selector="reset:" destination="RQD-k8-Ocw" id="90r-8R-KF4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="bbtnReset" destination="NAB-EZ-h2a" id="6ch-vl-F2I"/>
+                        <outlet property="bbtnSetting" destination="GR6-R3-CHW" id="efz-kE-OXa"/>
                         <outlet property="lblCount" destination="Pq1-Xv-Foj" id="Z9C-g3-Jh3"/>
                         <outlet property="stepper" destination="WBV-m7-TJ0" id="EH3-ev-o34"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EiN-sB-avp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-829" y="1003"/>
+            <point key="canvasLocation" x="-772" y="976"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="3bp-HR-OwW"/>
+    </inferredMetricsTieBreakers>
     <resources>
+        <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <image name="gearshape.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

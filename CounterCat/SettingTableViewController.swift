@@ -7,16 +7,12 @@
 
 import UIKit
 
-protocol CountOptionDelegate{
-    func didChangeOption(_ controller: SettingTableViewController, option: Int)
-}
 
 class SettingTableViewController: UITableViewController {
 
     @IBOutlet var optPicker: UIPickerView!
     @IBOutlet var bbtnComplete: UIBarButtonItem!
 
-    var delegate : CountOptionDelegate?
     var option = 0
     
     override func viewDidLoad() {
@@ -42,10 +38,11 @@ class SettingTableViewController: UITableViewController {
     }
     
     @IBAction func setComplete(sender: UIBarButtonItem){
-        _ = navigationController?.popViewController(animated: true)
-        if delegate != nil{
-            delegate?.didChangeOption(self, option: option)
-        }
+        
+    //    self.navigationController?.popToRootViewController(animated: false)
+      //  _ = navigationController?.popViewController(animated: true)
+        performSegue(withIdentifier: "sgCountDown", sender: self)
+
     }
 
     /*
@@ -99,7 +96,8 @@ class SettingTableViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sgCountDown"{
-      //      let ff = segue.destination as! CountDownViewController
+            let countdownController = segue.destination as! CountDownViewController
+            countdownController.modalPresentationStyle = .fullScreen
         }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
