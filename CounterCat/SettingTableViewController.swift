@@ -7,13 +7,17 @@
 
 import UIKit
 
+protocol CountOptionDelegate{
+    func didChangeOption(_ controller: SettingTableViewController, option: Int)
+}
+
 class SettingTableViewController: UITableViewController {
 
     @IBOutlet var optPicker: UIPickerView!
     @IBOutlet var bbtnComplete: UIBarButtonItem!
-    
-    var touchOption = ""
-    
+
+    var delegate : CountOptionDelegate?
+    var option = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,10 +42,10 @@ class SettingTableViewController: UITableViewController {
     }
     
     @IBAction func setComplete(sender: UIBarButtonItem){
-        
-        performSegue(withIdentifier: touchOption, sender: self)
-        self.dismiss(animated: true, completion: nil)
-        
+        _ = navigationController?.popViewController(animated: true)
+        if delegate != nil{
+            delegate?.didChangeOption(self, option: option)
+        }
     }
 
     /*
@@ -95,7 +99,7 @@ class SettingTableViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sgCountDown"{
-            let ff = segue.destination as! CountDownViewController
+      //      let ff = segue.destination as! CountDownViewController
         }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
@@ -105,7 +109,6 @@ class SettingTableViewController: UITableViewController {
 }
 
 extension SettingTableViewController: UIPickerViewDelegate, UIPickerViewDataSource{
-    
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -121,9 +124,7 @@ extension SettingTableViewController: UIPickerViewDelegate, UIPickerViewDataSour
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if row == 1{
-            touchOption = "sgCountDown"
-        }
+        option = row
     }
 }
 

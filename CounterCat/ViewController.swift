@@ -8,7 +8,8 @@
 import UIKit
 import AudioToolbox
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CountOptionDelegate {
+
 
     @IBOutlet var lblCount: UILabel!
     @IBOutlet var bbtnsetting: UIBarButtonItem!
@@ -21,14 +22,30 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         let slideUp = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.slideScreen(_:)))
-        slideUp.direction = UISwipeGestureRecognizer.Direction.up
-        self.view.addGestureRecognizer(slideUp)
-        
         let slideDown = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.slideScreen(_:)))
+        
+        slideUp.direction = UISwipeGestureRecognizer.Direction.up
         slideDown.direction = UISwipeGestureRecognizer.Direction.down
+        
+        self.view.addGestureRecognizer(slideUp)
         self.view.addGestureRecognizer(slideDown)
     }
 
+    func didChangeOption(_ controller: SettingTableViewController, option: Int) {
+        switch option{
+        case 0:
+            break;
+        case 1:
+            performSegue(withIdentifier: "sgDown", sender: self)
+            break;
+        case 2:
+            break;
+        default:
+            break;
+        }
+    }
+    
+    
     @objc func slideScreen(_ gesture: UISwipeGestureRecognizer){
         if gesture.direction == UISwipeGestureRecognizer.Direction.up{
                 lblCount.text = String(Int(lblCount.text!)! + 1)
@@ -36,28 +53,14 @@ class ViewController: UIViewController {
             lblCount.text = String(Int(lblCount.text!)! - 1)
         }
     }
- /*   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         //let touch = touches.count
         
         lblCount.text = String(Int(lblCount.text!)! + 1)
         if vibrate{
             AudioServicesPlaySystemSound(1520)
         }
-    }
-   */
-
-    
-    @IBAction func clickSetting(sender: UIBarButtonItem){
-        let settindAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-     
-        settindAlert.addAction(UIAlertAction(title: "카운트", style: .default))
-        settindAlert.addAction(UIAlertAction(title: "카운트다운", style: .default){_ in
-            self.performSegue(withIdentifier: "sgDown", sender: self)
-        })
-        settindAlert.addAction(UIAlertAction(title: "설정", style: .default))
-        settindAlert.addAction(UIAlertAction(title: "취소", style: .cancel))
-        
-        present(settindAlert, animated: true)
     }
     
     @IBAction func resetCount(sender: UIButton){
@@ -66,7 +69,12 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sgDown"{
-            let countdown = segue.destination as! CountDownViewController
+            let countDownView = segue.destination as! CountDownViewController
+            countDownView.modalPresentationStyle = .fullScreen
+        }
+        if segue.identifier == "sgSetting"{
+            let settingController = segue.destination as! SettingTableViewController
+            settingController.delegate = self
         }
     }
  

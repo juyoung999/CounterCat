@@ -34,7 +34,7 @@
                         <barButtonItem key="leftBarButtonItem" title="설정" image="gearshape.fill" catalog="system" id="XB2-FP-l1N">
                             <color key="tintColor" systemColor="systemGreenColor"/>
                             <connections>
-                                <segue destination="ghU-uS-qh5" kind="show" id="Wql-b8-YS6"/>
+                                <segue destination="ghU-uS-qh5" kind="show" identifier="sgSetting" id="Wql-b8-YS6"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="D8T-mT-N1Y">
@@ -48,12 +48,12 @@
                         <outlet property="bbtnReset" destination="D8T-mT-N1Y" id="oVg-g4-S2i"/>
                         <outlet property="bbtnsetting" destination="XB2-FP-l1N" id="YgS-B8-TWe"/>
                         <outlet property="lblCount" destination="G2o-Vw-Utk" id="kuV-Ho-A6j"/>
-                        <segue destination="RQD-k8-Ocw" kind="show" identifier="sgDown" animates="NO" id="zFt-Vf-PKd"/>
+                        <segue destination="RQD-k8-Ocw" kind="show" identifier="sgDown" id="hqH-Jy-lmn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-828" y="263"/>
+            <point key="canvasLocation" x="-772" y="263"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rJ0-fH-gMM">
@@ -184,7 +184,6 @@
                     <connections>
                         <outlet property="bbtnComplete" destination="3xr-2n-DhX" id="IGf-Bz-hIj"/>
                         <outlet property="optPicker" destination="d2M-Yh-xfR" id="Aet-3U-f2x"/>
-                        <segue destination="RQD-k8-Ocw" kind="show" identifier="sgCountDown" id="UVt-zw-b7y"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="03y-z0-qBt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -221,7 +220,7 @@
                             <constraint firstItem="WBV-m7-TJ0" firstAttribute="centerX" secondItem="i8f-s7-lJ7" secondAttribute="centerX" id="vEo-nM-hGc"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="2cb-Xo-zlx"/>
+                    <navigationItem key="navigationItem" id="J85-TK-wFy"/>
                     <connections>
                         <outlet property="lblCount" destination="Pq1-Xv-Foj" id="Z9C-g3-Jh3"/>
                         <outlet property="stepper" destination="WBV-m7-TJ0" id="EH3-ev-o34"/>
@@ -232,9 +231,6 @@
             <point key="canvasLocation" x="-829" y="1003"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="zFt-Vf-PKd"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="gearshape.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
