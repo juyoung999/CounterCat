@@ -75,7 +75,7 @@
             <objects>
                 <tableViewController id="ghU-uS-qh5" customClass="SettingTableViewController" customModule="CounterCat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="vg5-Xf-x0h">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <sections>
@@ -121,7 +121,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gfK-7Y-9We">
+                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gfK-7Y-9We">
                                                             <rect key="frame" x="333" y="0.0" width="51" height="31"/>
                                                         </switch>
                                                     </subviews>
@@ -153,6 +153,9 @@
                                                         </label>
                                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6eh-9v-76Y">
                                                             <rect key="frame" x="333" y="0.0" width="51" height="31"/>
+                                                            <connections>
+                                                                <action selector="changeVibrateSwitch:" destination="ghU-uS-qh5" eventType="valueChanged" id="xyo-UD-OMJ"/>
+                                                            </connections>
                                                         </switch>
                                                     </subviews>
                                                 </stackView>
@@ -184,29 +187,31 @@
                     <connections>
                         <outlet property="bbtnComplete" destination="3xr-2n-DhX" id="IGf-Bz-hIj"/>
                         <outlet property="optPicker" destination="d2M-Yh-xfR" id="Aet-3U-f2x"/>
+                        <outlet property="swVibrate" destination="6eh-9v-76Y" id="Snd-fO-pNc"/>
                         <segue destination="RQD-k8-Ocw" kind="show" identifier="sgCountDown" id="iz0-E0-4fE"/>
+                        <segue destination="k5w-vT-YNH" kind="show" identifier="sgSlide" id="s6E-ys-tgh"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="03y-z0-qBt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="111.59420289855073" y="262.5"/>
+            <point key="canvasLocation" x="77" y="1332"/>
         </scene>
         <!--countdownView-->
         <scene sceneID="KW5-fO-4MT">
             <objects>
                 <viewController title="countdownView" id="RQD-k8-Ocw" customClass="CountDownViewController" customModule="CounterCat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i8f-s7-lJ7">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pq1-Xv-Foj">
-                                <rect key="frame" x="161.5" y="238" width="91" height="179.5"/>
+                                <rect key="frame" x="161.5" y="150" width="91" height="179.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="150"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="WBV-m7-TJ0">
-                                <rect key="frame" x="160" y="680" width="94" height="32"/>
+                                <rect key="frame" x="160" y="626" width="94" height="32"/>
                                 <connections>
                                     <action selector="updownStepper:" destination="RQD-k8-Ocw" eventType="valueChanged" id="D6V-WJ-DHJ"/>
                                 </connections>
@@ -244,11 +249,58 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EiN-sB-avp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-772" y="976"/>
+            <point key="canvasLocation" x="77" y="263"/>
+        </scene>
+        <!--Slide Count Controller-->
+        <scene sceneID="0cb-1e-C5u">
+            <objects>
+                <viewController id="k5w-vT-YNH" customClass="SlideCountController" customModule="CounterCat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DtO-e6-ftQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SAQ-ZL-qJz">
+                                <rect key="frame" x="161.5" y="331" width="91" height="180"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="150"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="crG-fa-JYV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="SAQ-ZL-qJz" firstAttribute="centerY" secondItem="DtO-e6-ftQ" secondAttribute="centerY" id="Ea3-C6-Dtf"/>
+                            <constraint firstItem="SAQ-ZL-qJz" firstAttribute="centerX" secondItem="DtO-e6-ftQ" secondAttribute="centerX" id="opX-EL-Gez"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="nfk-Z0-UTr">
+                        <barButtonItem key="leftBarButtonItem" image="gearshape.fill" catalog="system" id="HOp-oo-pXj">
+                            <color key="tintColor" systemColor="systemGreenColor"/>
+                            <connections>
+                                <segue destination="ghU-uS-qh5" kind="show" identifier="sgSettingSlide" id="EB8-nT-5sl"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="arrow.clockwise" catalog="system" id="vtc-uo-5Ac">
+                            <color key="tintColor" systemColor="systemGreenColor"/>
+                            <connections>
+                                <action selector="resetCountWithSender:" destination="k5w-vT-YNH" id="07E-sb-EjV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="bbtnReset" destination="vtc-uo-5Ac" id="EbN-NG-zcU"/>
+                        <outlet property="bbtnsetting" destination="HOp-oo-pXj" id="yMZ-lA-9p0"/>
+                        <outlet property="lblCount" destination="SAQ-ZL-qJz" id="jAd-f6-6DJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="euL-P4-ula" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="971" y="263"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Wql-b8-YS6"/>
+        <segue reference="s6E-ys-tgh"/>
+        <segue reference="EB8-nT-5sl"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.clockwise" catalog="system" width="115" height="128"/>

@@ -7,21 +7,17 @@
 
 import UIKit
 
-protocol CountSlideDelegate{
-    func didChangeOption(_ controller: SettingTableViewController, touch: Bool)
-}
-
 class SettingTableViewController: UITableViewController {
 
     @IBOutlet var optPicker: UIPickerView!
     @IBOutlet var bbtnComplete: UIBarButtonItem!
+    @IBOutlet var swVibrate: UISwitch!
 
-    var delegate : CountSlideDelegate?
-    var option : String!
-    var touchOption = true
+    var option : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        swVibrate.isOn = UserDefaults.standard.bool(forKey: "swVibrateState")
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -39,19 +35,22 @@ class SettingTableViewController: UITableViewController {
         if let select = option{
             performSegue(withIdentifier: select, sender: self)
         }else{
-            if delegate != nil{
-                delegate?.didChangeOption(self, touch: touchOption)
-            }
             self.navigationController?.popToRootViewController(animated: true)
         }
+    }
+    
+    @IBAction func changeVibrateSwitch(_ sender: UISwitch){
+        UserDefaults.standard.set(sender.isOn, forKey: "swVibrateState")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sgCountDown"{
             let countdownController = segue.destination as! CountDownViewController
             countdownController.modalPresentationStyle = .fullScreen
+        }else if segue.identifier == "sgSlide"{
+            let slideController = segue.destination as! SlideCountController
+            slideController.modalPresentationStyle = .fullScreen
         }
-
     }
 }
 
@@ -73,13 +72,12 @@ extension SettingTableViewController: UIPickerViewDelegate, UIPickerViewDataSour
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch row{
         case 0:
-            touchOption = true
             break;
         case 1:
             option = "sgCountDown"
             break;
         case 2:
-            touchOption = false
+            option = "sgSlide"
             break;
         default:
             break;
