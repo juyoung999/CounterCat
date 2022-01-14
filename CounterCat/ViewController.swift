@@ -23,7 +23,7 @@ class ViewController: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
+      //  vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
     }
 
     @objc func slideScreen(_ gesture: UISwipeGestureRecognizer){
@@ -51,11 +51,6 @@ class ViewController: UIViewController{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        if segue.identifier == "sgSetting"{
-            let settingController = segue.destination as! SettingTableViewController
-
-        }
     }
  
 }

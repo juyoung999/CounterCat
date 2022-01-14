@@ -9,7 +9,7 @@ import UIKit
 
 class SettingTableViewController: UITableViewController {
 
-    @IBOutlet var optPicker: UIPickerView!
+    @IBOutlet var pkOption: UIPickerView!
     @IBOutlet var bbtnComplete: UIBarButtonItem!
     @IBOutlet var swVibrate: UISwitch!
 
@@ -18,8 +18,12 @@ class SettingTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         swVibrate.isOn = UserDefaults.standard.bool(forKey: "swVibrateState")
+        
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        pkOption.selectRow(UserDefaults.standard.integer(forKey: "optionPickerRow"), inComponent: 0, animated: true)
+    }
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -29,18 +33,25 @@ class SettingTableViewController: UITableViewController {
     }
     
     @IBAction func setComplete(sender: UIBarButtonItem){
-        
         // self.navigationController?.popToRootViewController(animated: false)
         //  _ = navigationController?.popViewController(animated: true)
         if let select = option{
-            performSegue(withIdentifier: select, sender: self)
+            if select == ""{
+                self.navigationController?.popToRootViewController(animated: true)
+            }else{
+                performSegue(withIdentifier: select, sender: self)
+            }
         }else{
-            self.navigationController?.popToRootViewController(animated: true)
+            _ = navigationController?.popViewController(animated: true)
         }
     }
     
     @IBAction func changeVibrateSwitch(_ sender: UISwitch){
         UserDefaults.standard.set(sender.isOn, forKey: "swVibrateState")
+    }
+    
+    @IBAction func chanedOptionPicker(_ sender: UIPickerView){
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -70,8 +81,10 @@ extension SettingTableViewController: UIPickerViewDelegate, UIPickerViewDataSour
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        UserDefaults.standard.set(pkOption.selectedRow(inComponent: 0), forKey: "optionPickerRow")
         switch row{
         case 0:
+            option = ""
             break;
         case 1:
             option = "sgCountDown"

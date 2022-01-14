@@ -27,11 +27,7 @@ class SlideCountController: UIViewController {
         self.view.addGestureRecognizer(slideUp)
         self.view.addGestureRecognizer(slideDown)
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
-    }
-    
+
 
     @objc func slideScreen(_ gesture: UISwipeGestureRecognizer){
             if vibrate{
@@ -51,10 +47,6 @@ class SlideCountController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-        if segue.identifier == "sgSettingSlide"{
-            let settingController = segue.destination as! SettingTableViewController
-          
-        }
     }
  
 }
