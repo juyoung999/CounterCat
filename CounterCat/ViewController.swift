@@ -19,11 +19,12 @@ class ViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UserDefaults.standard.set(0, forKey: "optionPickerRow")
         vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
     }
     
     override func viewWillAppear(_ animated: Bool) {
-      //  vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
+        vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
     }
 
     @objc func slideScreen(_ gesture: UISwipeGestureRecognizer){

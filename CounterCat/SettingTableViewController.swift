@@ -24,6 +24,7 @@ class SettingTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         pkOption.selectRow(UserDefaults.standard.integer(forKey: "optionPickerRow"), inComponent: 0, animated: true)
     }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -35,6 +36,9 @@ class SettingTableViewController: UITableViewController {
     @IBAction func setComplete(sender: UIBarButtonItem){
         // self.navigationController?.popToRootViewController(animated: false)
         //  _ = navigationController?.popViewController(animated: true)
+        UserDefaults.standard.set(swVibrate.isOn, forKey: "swVibrateState")
+        UserDefaults.standard.set(pkOption.selectedRow(inComponent: 0), forKey: "optionPickerRow")
+        
         if let select = option{
             if select == ""{
                 self.navigationController?.popToRootViewController(animated: true)
@@ -46,12 +50,8 @@ class SettingTableViewController: UITableViewController {
         }
     }
     
-    @IBAction func changeVibrateSwitch(_ sender: UISwitch){
-        UserDefaults.standard.set(sender.isOn, forKey: "swVibrateState")
-    }
-    
-    @IBAction func chanedOptionPicker(_ sender: UIPickerView){
-        
+    @IBAction func clickBackButton(_ sender: UIBarButtonItem){
+        _ = navigationController?.popViewController(animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -81,7 +81,6 @@ extension SettingTableViewController: UIPickerViewDelegate, UIPickerViewDataSour
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        UserDefaults.standard.set(pkOption.selectedRow(inComponent: 0), forKey: "optionPickerRow")
         switch row{
         case 0:
             option = ""
