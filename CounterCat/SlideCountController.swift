@@ -8,12 +8,14 @@
 import UIKit
 import AudioToolbox
 
-class SlideCountController: UIViewController {
+class SlideCountController: UIViewController, CountTargetDelegate {
+    
     @IBOutlet var lblCount: UILabel!
     @IBOutlet var bbtnsetting: UIBarButtonItem!
     @IBOutlet var bbtnReset: UIBarButtonItem!
 
     var vibrate : Bool!
+    var targetValue : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,10 @@ class SlideCountController: UIViewController {
         vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
     }
 
+    func didChangeTarget(_ controller: SettingTableViewController, target: String) {
+        targetValue = target
+    }
+    
     @objc func slideScreen(_ gesture: UISwipeGestureRecognizer){
         if vibrate{
             AudioServicesPlaySystemSound(1520)
@@ -43,6 +49,13 @@ class SlideCountController: UIViewController {
                 lblCount.text = String(Int(lblCount.text!)! - 1)
             }
         }
+        if let targetValue = targetValue {
+           if lblCount.text == targetValue{
+                view.backgroundColor = UIColor.green
+           }else if lblCount.text == String(Int(targetValue)! + 1){
+               view.backgroundColor = UIColor.systemBackground
+           }
+        }
     }
 
     
@@ -51,7 +64,10 @@ class SlideCountController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        if segue.identifier == "sgSettingSlide"{
+            let setController = segue.destination as! SettingTableViewController
+            setController.delegate = self
+        }
     }
  
 }

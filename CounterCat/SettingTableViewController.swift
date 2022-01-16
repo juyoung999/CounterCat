@@ -25,10 +25,12 @@ class SettingTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         swVibrate.isOn = UserDefaults.standard.bool(forKey: "swVibrateState")
+        swTarget.isOn = UserDefaults.standard.bool(forKey: "swTargetValue")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         pkOption.selectRow(UserDefaults.standard.integer(forKey: "optionPickerRow"), inComponent: 0, animated: true)
+   
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -36,7 +38,7 @@ class SettingTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 3
     }
     
     @IBAction func setComplete(sender: UIBarButtonItem){
@@ -44,10 +46,11 @@ class SettingTableViewController: UITableViewController {
         //  _ = navigationController?.popViewController(animated: true)
         UserDefaults.standard.set(swVibrate.isOn, forKey: "swVibrateState")
         UserDefaults.standard.set(pkOption.selectedRow(inComponent: 0), forKey: "optionPickerRow")
+        UserDefaults.standard.set(swTarget.isOn, forKey: "swTargetValue")
         
-        if let target = tfTaget.text{
+        if tfTaget.text != nil && swTarget.isOn{
             if delegate != nil{
-                delegate?.didChangeTarget(self, target: target)
+                delegate?.didChangeTarget(self, target: tfTaget.text!)
             }
         }
             
@@ -67,7 +70,7 @@ class SettingTableViewController: UITableViewController {
     }
     
     @IBAction func switchTargetValue(_ sender: UISwitch){
-        
+        sender.isOn ? (tfTaget.isEnabled = true) : (tfTaget.isEnabled = false)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

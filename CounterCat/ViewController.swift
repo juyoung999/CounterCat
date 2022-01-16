@@ -38,9 +38,11 @@ class ViewController: UIViewController, CountTargetDelegate{
         }
         lblCount.text = String(Int(lblCount.text!)! + 1)
         if let targetValue = targetValue {
-            if lblCount.text == targetValue{
+           if lblCount.text == targetValue{
                 view.backgroundColor = UIColor.green
-            }
+           }else if lblCount.text == String(Int(targetValue)! + 1){
+               view.backgroundColor = UIColor.systemBackground
+           }
         }
     }
     
