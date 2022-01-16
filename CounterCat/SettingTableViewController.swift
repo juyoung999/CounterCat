@@ -7,18 +7,24 @@
 
 import UIKit
 
+protocol CountTargetDelegate{
+    func didChangeTarget(_ controller: SettingTableViewController, target: String)
+}
+
 class SettingTableViewController: UITableViewController {
 
     @IBOutlet var pkOption: UIPickerView!
     @IBOutlet var bbtnComplete: UIBarButtonItem!
     @IBOutlet var swVibrate: UISwitch!
-
+    @IBOutlet var swTarget: UISwitch!
+    @IBOutlet var tfTaget: UITextField!
+    
     var option : String?
+    var delegate : CountTargetDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         swVibrate.isOn = UserDefaults.standard.bool(forKey: "swVibrateState")
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,7 +36,7 @@ class SettingTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
     @IBAction func setComplete(sender: UIBarButtonItem){
@@ -39,6 +45,12 @@ class SettingTableViewController: UITableViewController {
         UserDefaults.standard.set(swVibrate.isOn, forKey: "swVibrateState")
         UserDefaults.standard.set(pkOption.selectedRow(inComponent: 0), forKey: "optionPickerRow")
         
+        if let target = tfTaget.text{
+            if delegate != nil{
+                delegate?.didChangeTarget(self, target: target)
+            }
+        }
+            
         if let select = option{
             if select == ""{
                 self.navigationController?.popToRootViewController(animated: true)
@@ -52,6 +64,10 @@ class SettingTableViewController: UITableViewController {
     
     @IBAction func clickBackButton(_ sender: UIBarButtonItem){
         _ = navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func switchTargetValue(_ sender: UISwitch){
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

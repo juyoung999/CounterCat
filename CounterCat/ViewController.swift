@@ -8,13 +8,14 @@
 import UIKit
 import AudioToolbox
 
-class ViewController: UIViewController{
+class ViewController: UIViewController, CountTargetDelegate{
 
     @IBOutlet var lblCount: UILabel!
     @IBOutlet var bbtnsetting: UIBarButtonItem!
     @IBOutlet var bbtnReset: UIBarButtonItem!
 
     var vibrate : Bool!
+    var targetValue : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,25 +27,26 @@ class ViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
     }
-
-    @objc func slideScreen(_ gesture: UISwipeGestureRecognizer){
-        
-            if vibrate{
-                AudioServicesPlaySystemSound(1520)
-            }
-            if gesture.direction == UISwipeGestureRecognizer.Direction.up{
-                    lblCount.text = String(Int(lblCount.text!)! + 1)
-            }else{
-                lblCount.text = String(Int(lblCount.text!)! - 1)
-            }
+    
+    func didChangeTarget(_ controller: SettingTableViewController, target: String) {
+        targetValue = target
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-            if vibrate{
-                AudioServicesPlaySystemSound(1520)
+        if vibrate{
+            AudioServicesPlaySystemSound(1520)
+        }
+        lblCount.text = String(Int(lblCount.text!)! + 1)
+        if let targetValue = targetValue {
+            if lblCount.text == targetValue{
+                view.backgroundColor = UIColor.green
             }
-            lblCount.text = String(Int(lblCount.text!)! + 1)
+        }
+    }
+    
+    func alertTarget(_ target: String){
+      //  lblCount.addObserver(self, forKeyPath: "10", options: [.old, .new], context: nil)
+       
     }
     
     @IBAction func resetCount(sender: UIButton){
@@ -52,6 +54,10 @@ class ViewController: UIViewController{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sgViewSetting"{
+            let setController = segue.destination as! SettingTableViewController
+            setController.delegate = self
+        }
     }
  
 }

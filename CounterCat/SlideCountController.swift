@@ -20,8 +20,8 @@ class SlideCountController: UIViewController {
         
         vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
         
-        let slideUp = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.slideScreen(_:)))
-        let slideDown = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.slideScreen(_:)))
+        let slideUp = UISwipeGestureRecognizer(target: self, action: #selector(SlideCountController.slideScreen(_:)))
+        let slideDown = UISwipeGestureRecognizer(target: self, action: #selector(SlideCountController.slideScreen(_:)))
         slideUp.direction = UISwipeGestureRecognizer.Direction.up
         slideDown.direction = UISwipeGestureRecognizer.Direction.down
         self.view.addGestureRecognizer(slideUp)
@@ -33,14 +33,16 @@ class SlideCountController: UIViewController {
     }
 
     @objc func slideScreen(_ gesture: UISwipeGestureRecognizer){
-            if vibrate{
-                AudioServicesPlaySystemSound(1520)
-            }
-            if gesture.direction == UISwipeGestureRecognizer.Direction.up{
-                    lblCount.text = String(Int(lblCount.text!)! + 1)
-            }else{
+        if vibrate{
+            AudioServicesPlaySystemSound(1520)
+        }
+        if gesture.direction == UISwipeGestureRecognizer.Direction.up{
+                lblCount.text = String(Int(lblCount.text!)! + 1)
+        }else{
+            if lblCount.text != "0"{
                 lblCount.text = String(Int(lblCount.text!)! - 1)
             }
+        }
     }
 
     
