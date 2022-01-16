@@ -8,7 +8,7 @@
 import UIKit
 import AudioToolbox
 
-class SlideCountController: UIViewController, CountTargetDelegate {
+class SlideCountController: UIViewController{
     
     @IBOutlet var lblCount: UILabel!
     @IBOutlet var bbtnsetting: UIBarButtonItem!
@@ -32,10 +32,6 @@ class SlideCountController: UIViewController, CountTargetDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
-    }
-
-    func didChangeTarget(_ controller: SettingTableViewController, target: String) {
-        targetValue = target
     }
     
     @objc func slideScreen(_ gesture: UISwipeGestureRecognizer){
@@ -64,10 +60,7 @@ class SlideCountController: UIViewController, CountTargetDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "sgSettingSlide"{
-            let setController = segue.destination as! SettingTableViewController
-            setController.delegate = self
-        }
+
     }
  
 }

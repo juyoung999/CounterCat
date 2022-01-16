@@ -8,7 +8,7 @@
 import UIKit
 import AudioToolbox
 
-class CountDownViewController: UIViewController, CountTargetDelegate {
+class CountDownViewController: UIViewController {
 
     @IBOutlet weak var lblCount: UILabel!
     @IBOutlet weak var stepper: UIStepper!
@@ -30,10 +30,6 @@ class CountDownViewController: UIViewController, CountTargetDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
-    }
-    
-    func didChangeTarget(_ controller: SettingTableViewController, target: String) {
-        targetValue = target
     }
     
     @IBAction func updownStepper(_ sender: UIStepper) {
@@ -60,9 +56,5 @@ class CountDownViewController: UIViewController, CountTargetDelegate {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "sgSettingButton"{
-            let setController = segue.destination as! SettingTableViewController
-            setController.delegate = self
-        }
     }
 }

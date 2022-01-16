@@ -47,13 +47,11 @@ class SettingTableViewController: UITableViewController {
         UserDefaults.standard.set(swVibrate.isOn, forKey: "swVibrateState")
         UserDefaults.standard.set(pkOption.selectedRow(inComponent: 0), forKey: "optionPickerRow")
         UserDefaults.standard.set(swTarget.isOn, forKey: "swTargetValue")
-        
-        if tfTaget.text != nil && swTarget.isOn{
-            if delegate != nil{
-                delegate?.didChangeTarget(self, target: tfTaget.text!)
-            }
-        }
             
+        if tfTaget.text != nil && swTarget.isOn && delegate != nil{
+            delegate?.didChangeTarget(self, target: tfTaget.text!)
+        }
+        
         if let select = option{
             if select == ""{
                 self.navigationController?.popToRootViewController(animated: true)
@@ -76,9 +74,15 @@ class SettingTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sgCountDown"{
             let countdownController = segue.destination as! CountDownViewController
+            if tfTaget.text != nil && swTarget.isOn{
+                countdownController.targetValue = tfTaget.text
+            }
             countdownController.modalPresentationStyle = .fullScreen
         }else if segue.identifier == "sgSlide"{
             let slideController = segue.destination as! SlideCountController
+            if tfTaget.text != nil && swTarget.isOn{
+                slideController.targetValue = tfTaget.text
+            }
             slideController.modalPresentationStyle = .fullScreen
         }
     }

@@ -46,10 +46,6 @@ class ViewController: UIViewController, CountTargetDelegate{
         }
     }
     
-    func alertTarget(_ target: String){
-      //  lblCount.addObserver(self, forKeyPath: "10", options: [.old, .new], context: nil)
-       
-    }
     
     @IBAction func resetCount(sender: UIButton){
         lblCount.text = "0"
