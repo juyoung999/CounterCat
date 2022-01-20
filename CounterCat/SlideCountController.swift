@@ -47,8 +47,8 @@ class SlideCountController: UIViewController{
         }
         if let targetValue = targetValue {
            if lblCount.text == targetValue{
-                view.backgroundColor = UIColor.green
-           }else if lblCount.text == String(Int(targetValue)! + 1){
+                view.backgroundColor = UIColor.yellow
+           }else if lblCount.text == String(Int(targetValue)! + 1) || lblCount.text == String(Int(targetValue)! - 1){
                view.backgroundColor = UIColor.systemBackground
            }
         }
@@ -57,6 +57,7 @@ class SlideCountController: UIViewController{
     
     @IBAction func resetCount(sender: UIButton){
         lblCount.text = "0"
+        view.backgroundColor = UIColor.systemBackground
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

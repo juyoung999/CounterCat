@@ -83,13 +83,13 @@ class SettingTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sgCountDown"{
             let countdownController = segue.destination as! CountDownViewController
-            if tfTaget.text != nil && swTarget.isOn{
+            if tfTaget.text != "" && swTarget.isOn{
                 countdownController.targetValue = tfTaget.text
             }
             countdownController.modalPresentationStyle = .fullScreen
         }else if segue.identifier == "sgSlide"{
             let slideController = segue.destination as! SlideCountController
-            if tfTaget.text != nil && swTarget.isOn{
+            if tfTaget.text != "" && swTarget.isOn{
                 slideController.targetValue = tfTaget.text
             }
             slideController.modalPresentationStyle = .fullScreen

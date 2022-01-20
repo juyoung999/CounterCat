@@ -40,8 +40,8 @@ class CountDownViewController: UIViewController {
         
         if let targetValue = targetValue {
            if lblCount.text == targetValue{
-                view.backgroundColor = UIColor.green
-           }else if lblCount.text == String(Int(targetValue)! + 1){
+                view.backgroundColor = UIColor.yellow
+           }else if lblCount.text == String(Int(targetValue)! + 1) || lblCount.text == String(Int(targetValue)! - 1){
                view.backgroundColor = UIColor.systemBackground
            }
         }
@@ -53,6 +53,7 @@ class CountDownViewController: UIViewController {
         }
         lblCount.text = "0"
         stepper.value = Double(0)
+        view.backgroundColor = UIColor.systemBackground
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -22,6 +22,9 @@ class ViewController: UIViewController, CountTargetDelegate{
         
         UserDefaults.standard.set(0, forKey: "optionPickerRow")
         vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
+        if UserDefaults.standard.bool(forKey: "swTargetValue"){
+            targetValue = UserDefaults.standard.string(forKey: "targetText")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,8 +42,8 @@ class ViewController: UIViewController, CountTargetDelegate{
         lblCount.text = String(Int(lblCount.text!)! + 1)
         if let targetValue = targetValue {
            if lblCount.text == targetValue{
-                view.backgroundColor = UIColor.green
-           }else if lblCount.text == String(Int(targetValue)! + 1) || lblCount.text == String(Int(targetValue)! - 1){
+                view.backgroundColor = UIColor.yellow
+           }else if lblCount.text == String(Int(targetValue)! + 1){
                view.backgroundColor = UIColor.systemBackground
            }
         }
@@ -49,6 +52,7 @@ class ViewController: UIViewController, CountTargetDelegate{
     
     @IBAction func resetCount(sender: UIButton){
         lblCount.text = "0"
+        view.backgroundColor = UIColor.systemBackground
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
