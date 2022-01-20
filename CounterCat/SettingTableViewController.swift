@@ -26,6 +26,9 @@ class SettingTableViewController: UITableViewController {
         super.viewDidLoad()
         swVibrate.isOn = UserDefaults.standard.bool(forKey: "swVibrateState")
         swTarget.isOn = UserDefaults.standard.bool(forKey: "swTargetValue")
+        swTarget.isOn = UserDefaults.standard.bool(forKey: "swTargetValue")
+        tfTaget.isEnabled = UserDefaults.standard.bool(forKey: "swTargetValue")
+        tfTaget.text = UserDefaults.standard.string(forKey: "targetText")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,19 +50,25 @@ class SettingTableViewController: UITableViewController {
         UserDefaults.standard.set(swVibrate.isOn, forKey: "swVibrateState")
         UserDefaults.standard.set(pkOption.selectedRow(inComponent: 0), forKey: "optionPickerRow")
         UserDefaults.standard.set(swTarget.isOn, forKey: "swTargetValue")
-            
-        if tfTaget.text != nil && swTarget.isOn && delegate != nil{
-            delegate?.didChangeTarget(self, target: tfTaget.text!)
-        }
         
-        if let select = option{
-            if select == ""{
-                self.navigationController?.popToRootViewController(animated: true)
-            }else{
-                performSegue(withIdentifier: select, sender: self)
-            }
+        if tfTaget.text == "" && swTarget.isOn{
+            let notice = UIAlertController(title: "목표 미설정", message: "목표값을 입력해주세요.", preferredStyle: .alert)
+            notice.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+            self.present(notice, animated: true, completion: nil)
         }else{
-            _ = navigationController?.popViewController(animated: true)
+            if tfTaget.text != "" && swTarget.isOn && delegate != nil{
+                delegate?.didChangeTarget(self, target: tfTaget.text!)
+                UserDefaults.standard.set(tfTaget.text!, forKey: "targetText")
+            }
+            if let select = option{
+                if select == ""{
+                    self.navigationController?.popToRootViewController(animated: true)
+                }else{
+                    performSegue(withIdentifier: select, sender: self)
+                }
+            }else{
+                _ = navigationController?.popViewController(animated: true)
+            }
         }
     }
     
