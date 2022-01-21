@@ -1,0 +1,30 @@
+
+/* Class = "UIBarButtonItem"; title = "완료"; ObjectID = "3xr-2n-DhX"; */
+"3xr-2n-DhX.title" = "완료";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "G2o-Vw-Utk"; */
+"G2o-Vw-Utk.text" = "0";
+
+/* Class = "UITableViewSection"; headerTitle = "카운트 방식 "; ObjectID = "GM3-32-yDC"; */
+"GM3-32-yDC.headerTitle" = "카운트 방식 ";
+
+/* Class = "UILabel"; text = "목표값"; ObjectID = "Ino-hQ-V9a"; */
+"Ino-hQ-V9a.text" = "목표값";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "Pq1-Xv-Foj"; */
+"Pq1-Xv-Foj.text" = "0";
+
+/* Class = "UIViewController"; title = "countdownView"; ObjectID = "RQD-k8-Ocw"; */
+"RQD-k8-Ocw.title" = "countdownView";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "SAQ-ZL-qJz"; */
+"SAQ-ZL-qJz.text" = "0";
+
+/* Class = "UIBarButtonItem"; title = "설정"; ObjectID = "XB2-FP-l1N"; */
+"XB2-FP-l1N.title" = "설정";
+
+/* Class = "UILabel"; text = "카운트 진동"; ObjectID = "oGR-wo-rql"; */
+"oGR-wo-rql.text" = "카운트 진동";
+
+/* Class = "UIBarButtonItem"; title = "뒤로"; ObjectID = "y01-nr-L6V"; */
+"y01-nr-L6V.title" = "뒤로";

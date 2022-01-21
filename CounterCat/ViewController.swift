@@ -19,7 +19,6 @@ class ViewController: UIViewController, CountTargetDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         UserDefaults.standard.set(0, forKey: "optionPickerRow")
         vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
         if UserDefaults.standard.bool(forKey: "swTargetValue"){
@@ -42,7 +41,7 @@ class ViewController: UIViewController, CountTargetDelegate{
         lblCount.text = String(Int(lblCount.text!)! + 1)
         if let targetValue = targetValue {
            if lblCount.text == targetValue{
-                view.backgroundColor = UIColor.yellow
+               view.backgroundColor = UIColor.yellow
            }else if lblCount.text == String(Int(targetValue)! + 1){
                view.backgroundColor = UIColor.systemBackground
            }
