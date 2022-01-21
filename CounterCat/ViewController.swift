@@ -24,6 +24,8 @@ class ViewController: UIViewController, CountTargetDelegate{
         if UserDefaults.standard.bool(forKey: "swTargetValue"){
             targetValue = UserDefaults.standard.string(forKey: "targetText")
         }
+        lblCount.sizeToFit()
+        lblCount.text = "99999"
     }
     
     override func viewWillAppear(_ animated: Bool) {
