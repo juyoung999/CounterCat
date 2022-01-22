@@ -22,12 +22,11 @@ class CountDownViewController: UIViewController {
         // Do any additional setup after loading the view.
         // navigationController?.setNavigationBarHidden(false, animated: true)
         stepper.transform = stepper.transform.scaledBy(x: 3.0, y: 2.5)
-        
         vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
+       // vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
     }
     
     @IBAction func updownStepper(_ sender: UIStepper) {

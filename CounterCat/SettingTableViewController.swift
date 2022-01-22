@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CountTargetDelegate{
-    func didChangeTarget(_ controller: SettingTableViewController, target: String)
+    func didChangeTarget(_ controller: SettingTableViewController, target: String?)
     func didChangeVibrate(_ controller: SettingTableViewController, vibrate: Bool)
 }
 
@@ -45,24 +45,31 @@ class SettingTableViewController: UITableViewController {
     @IBAction func setComplete(sender: UIBarButtonItem){
         // self.navigationController?.popToRootViewController(animated: false)
         //  _ = navigationController?.popViewController(animated: true)
-        if tfTaget.text == "" && swTarget.isOn{
-            let notice = UIAlertController(title: "목표 미설정", message: "목표값을 입력해주세요.", preferredStyle: .alert)
-            notice.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-            self.present(notice, animated: true, completion: nil)
-        }else{
-            if tfTaget.text != "" && swTarget.isOn && delegate != nil{
+        
+        if swTarget.isOn && delegate != nil{
+            if tfTaget.text != ""{
                 delegate?.didChangeTarget(self, target: tfTaget.text!)
                 UserDefaults.standard.set(tfTaget.text!, forKey: "targetText")
-            }
-            if let select = option{
-                if select == "touch"{
-                    self.navigationController?.popToRootViewController(animated: true)
-                }else{
-                    performSegue(withIdentifier: select, sender: self)
-                }
+                popSettingView()
             }else{
-                _ = navigationController?.popViewController(animated: true)
+                let notice = UIAlertController(title: "목표 미설정", message: "목표값을 입력해주세요.", preferredStyle: .alert)
+                notice.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+                self.present(notice, animated: true, completion: nil)
             }
+        }else{
+            popSettingView()
+        }
+    }
+    
+    func popSettingView(){
+        if let select = option{
+            if select == "touch"{
+                self.navigationController?.popToRootViewController(animated: true)
+            }else{
+                performSegue(withIdentifier: select, sender: self)
+            }
+        }else{
+            _ = navigationController?.popViewController(animated: true)
         }
     }
     
@@ -72,11 +79,19 @@ class SettingTableViewController: UITableViewController {
     
     @IBAction func changeTargetSwitch(_ sender: UISwitch){
         sender.isOn ? (tfTaget.isEnabled = true) : (tfTaget.isEnabled = false)
-        UserDefaults.standard.set(swTarget.isOn, forKey: "swTargetValue")
+        if sender.isOn == false{
+            if delegate != nil{
+                delegate?.didChangeTarget(self, target: nil)
+            }
+        }
+        UserDefaults.standard.set(sender.isOn, forKey: "swTargetValue")
     }
     
     @IBAction func changeVibrateSwitch(_ sender: UISwitch){
-        UserDefaults.standard.set(swVibrate.isOn, forKey: "swVibrateState")
+        UserDefaults.standard.set(sender.isOn, forKey: "swVibrateState")
+        if delegate != nil{
+            delegate?.didChangeVibrate(self, vibrate: sender.isOn)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -85,12 +100,14 @@ class SettingTableViewController: UITableViewController {
             if tfTaget.text != "" && swTarget.isOn{
                 countdownController.targetValue = tfTaget.text
             }
+            countdownController.vibrate = swVibrate.isOn
             countdownController.modalPresentationStyle = .fullScreen
         }else if segue.identifier == "sgSlide"{
             let slideController = segue.destination as! SlideCountController
             if tfTaget.text != "" && swTarget.isOn{
                 slideController.targetValue = tfTaget.text
             }
+            slideController.vibrate = swVibrate.isOn
             slideController.modalPresentationStyle = .fullScreen
         }
     }

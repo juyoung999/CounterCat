@@ -20,7 +20,10 @@ class SlideCountController: UIViewController{
         super.viewDidLoad()
         
         vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
-        
+        addSlideGesture()
+    }
+    
+    func addSlideGesture(){
         let slideUp = UISwipeGestureRecognizer(target: self, action: #selector(SlideCountController.slideScreen(_:)))
         let slideDown = UISwipeGestureRecognizer(target: self, action: #selector(SlideCountController.slideScreen(_:)))
         slideUp.direction = UISwipeGestureRecognizer.Direction.up
@@ -30,7 +33,7 @@ class SlideCountController: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
+      //  vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
     }
     
     @objc func slideScreen(_ gesture: UISwipeGestureRecognizer){

@@ -24,12 +24,8 @@ class ViewController: UIViewController, CountTargetDelegate{
             targetValue = UserDefaults.standard.string(forKey: "targetText")
         }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-       // vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
-    }
-    
-    func didChangeTarget(_ controller: SettingTableViewController, target: String) {
+
+    func didChangeTarget(_ controller: SettingTableViewController, target: String?) {
         targetValue = target
     }
     
