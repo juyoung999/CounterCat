@@ -9,23 +9,22 @@ import UIKit
 
 protocol CountTargetDelegate{
     func didChangeTarget(_ controller: SettingTableViewController, target: String)
+    func didChangeVibrate(_ controller: SettingTableViewController, vibrate: Bool)
 }
 
 class SettingTableViewController: UITableViewController {
-
+    
+    var option : String?
+    var delegate : CountTargetDelegate?
     @IBOutlet var pkOption: UIPickerView!
     @IBOutlet var bbtnComplete: UIBarButtonItem!
     @IBOutlet var swVibrate: UISwitch!
     @IBOutlet var swTarget: UISwitch!
     @IBOutlet var tfTaget: UITextField!
     
-    var option : String?
-    var delegate : CountTargetDelegate?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         swVibrate.isOn = UserDefaults.standard.bool(forKey: "swVibrateState")
-        swTarget.isOn = UserDefaults.standard.bool(forKey: "swTargetValue")
         swTarget.isOn = UserDefaults.standard.bool(forKey: "swTargetValue")
         tfTaget.isEnabled = UserDefaults.standard.bool(forKey: "swTargetValue")
         tfTaget.text = UserDefaults.standard.string(forKey: "targetText")
@@ -33,7 +32,6 @@ class SettingTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         pkOption.selectRow(UserDefaults.standard.integer(forKey: "optionPickerRow"), inComponent: 0, animated: true)
-   
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -47,10 +45,6 @@ class SettingTableViewController: UITableViewController {
     @IBAction func setComplete(sender: UIBarButtonItem){
         // self.navigationController?.popToRootViewController(animated: false)
         //  _ = navigationController?.popViewController(animated: true)
-        UserDefaults.standard.set(swVibrate.isOn, forKey: "swVibrateState")
-        UserDefaults.standard.set(pkOption.selectedRow(inComponent: 0), forKey: "optionPickerRow")
-        UserDefaults.standard.set(swTarget.isOn, forKey: "swTargetValue")
-        
         if tfTaget.text == "" && swTarget.isOn{
             let notice = UIAlertController(title: "목표 미설정", message: "목표값을 입력해주세요.", preferredStyle: .alert)
             notice.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
@@ -61,7 +55,7 @@ class SettingTableViewController: UITableViewController {
                 UserDefaults.standard.set(tfTaget.text!, forKey: "targetText")
             }
             if let select = option{
-                if select == ""{
+                if select == "touch"{
                     self.navigationController?.popToRootViewController(animated: true)
                 }else{
                     performSegue(withIdentifier: select, sender: self)
@@ -76,8 +70,13 @@ class SettingTableViewController: UITableViewController {
         _ = navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func switchTargetValue(_ sender: UISwitch){
+    @IBAction func changeTargetSwitch(_ sender: UISwitch){
         sender.isOn ? (tfTaget.isEnabled = true) : (tfTaget.isEnabled = false)
+        UserDefaults.standard.set(swTarget.isOn, forKey: "swTargetValue")
+    }
+    
+    @IBAction func changeVibrateSwitch(_ sender: UISwitch){
+        UserDefaults.standard.set(swVibrate.isOn, forKey: "swVibrateState")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -113,9 +112,10 @@ extension SettingTableViewController: UIPickerViewDelegate, UIPickerViewDataSour
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        UserDefaults.standard.set(row, forKey: "optionPickerRow")
         switch row{
         case 0:
-            option = ""
+            option = "touch"
             break;
         case 1:
             option = "sgCountDown"

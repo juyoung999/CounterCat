@@ -9,21 +9,19 @@ import UIKit
 import AudioToolbox
 
 class CountDownViewController: UIViewController {
-
+    
+    var vibrate : Bool!
+    var targetValue : String?
     @IBOutlet weak var lblCount: UILabel!
     @IBOutlet weak var stepper: UIStepper!
     @IBOutlet weak var bbtnReset: UIBarButtonItem!
     @IBOutlet weak var bbtnSetting: UIBarButtonItem!
-       
-    var vibrate : Bool!
-    var targetValue : String?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         // navigationController?.setNavigationBarHidden(false, animated: true)
         stepper.transform = stepper.transform.scaledBy(x: 3.0, y: 2.5)
-        stepper.maximumValue = 1000
         
         vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
     }

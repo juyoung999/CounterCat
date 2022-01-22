@@ -10,12 +10,11 @@ import AudioToolbox
 
 class SlideCountController: UIViewController{
     
+    var vibrate : Bool!
+    var targetValue : String?
     @IBOutlet var lblCount: UILabel!
     @IBOutlet var bbtnsetting: UIBarButtonItem!
     @IBOutlet var bbtnReset: UIBarButtonItem!
-
-    var vibrate : Bool!
-    var targetValue : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()

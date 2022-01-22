@@ -9,14 +9,13 @@ import UIKit
 import AudioToolbox
 
 class ViewController: UIViewController, CountTargetDelegate{
-
+    
+    var vibrate : Bool!
+    var targetValue : String?
     @IBOutlet var lblCount: UILabel!
     @IBOutlet var bbtnsetting: UIBarButtonItem!
     @IBOutlet var bbtnReset: UIBarButtonItem!
 
-    var vibrate : Bool!
-    var targetValue : String?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         UserDefaults.standard.set(0, forKey: "optionPickerRow")
@@ -24,22 +23,22 @@ class ViewController: UIViewController, CountTargetDelegate{
         if UserDefaults.standard.bool(forKey: "swTargetValue"){
             targetValue = UserDefaults.standard.string(forKey: "targetText")
         }
-        lblCount.sizeToFit()
-        lblCount.text = "99999"
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
+       // vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
     }
     
     func didChangeTarget(_ controller: SettingTableViewController, target: String) {
         targetValue = target
     }
     
+    func didChangeVibrate(_ controller: SettingTableViewController, vibrate: Bool) {
+        self.vibrate = vibrate
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if vibrate{
-            AudioServicesPlaySystemSound(1520)
-        }
+        if vibrate{AudioServicesPlaySystemSound(1520)}
         lblCount.text = String(Int(lblCount.text!)! + 1)
         if let targetValue = targetValue {
            if lblCount.text == targetValue{
@@ -62,6 +61,5 @@ class ViewController: UIViewController, CountTargetDelegate{
             setController.delegate = self
         }
     }
- 
 }
 
