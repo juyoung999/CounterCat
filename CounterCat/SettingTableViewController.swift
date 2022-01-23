@@ -7,15 +7,9 @@
 
 import UIKit
 
-protocol CountSettingDelegate{
-    func didChangeTarget(_ controller: SettingTableViewController, target: String?)
-    func didChangeVibrate(_ controller: SettingTableViewController, vibrate: Bool)
-}
-
 class SettingTableViewController: UITableViewController {
     
     var option : String?
-    var delegate : CountSettingDelegate?
     @IBOutlet var pkOption: UIPickerView!
     @IBOutlet var bbtnComplete: UIBarButtonItem!
     @IBOutlet var swVibrate: UISwitch!
@@ -46,9 +40,8 @@ class SettingTableViewController: UITableViewController {
         // self.navigationController?.popToRootViewController(animated: false)
         //  _ = navigationController?.popViewController(animated: true)
         
-        if swTarget.isOn && delegate != nil{
+        if swTarget.isOn{
             if tfTaget.text != ""{
-                delegate?.didChangeTarget(self, target: tfTaget.text!)
                 UserDefaults.standard.set(tfTaget.text!, forKey: "targetText")
                 popSettingView()
             }else{
@@ -80,34 +73,21 @@ class SettingTableViewController: UITableViewController {
     @IBAction func changeTargetSwitch(_ sender: UISwitch){
         sender.isOn ? (tfTaget.isEnabled = true) : (tfTaget.isEnabled = false)
         if sender.isOn == false{
-            if delegate != nil{
-                delegate?.didChangeTarget(self, target: nil)
-            }
+            UserDefaults.standard.set(nil, forKey: "targetText")
         }
         UserDefaults.standard.set(sender.isOn, forKey: "swTargetValue")
     }
     
     @IBAction func changeVibrateSwitch(_ sender: UISwitch){
         UserDefaults.standard.set(sender.isOn, forKey: "swVibrateState")
-        if delegate != nil{
-            delegate?.didChangeVibrate(self, vibrate: sender.isOn)
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sgCountDown"{
             let countdownController = segue.destination as! CountDownViewController
-           if tfTaget.text != "" && swTarget.isOn{
-                countdownController.targetValue = tfTaget.text
-            }
-            countdownController.vibrate = swVibrate.isOn
             countdownController.modalPresentationStyle = .fullScreen
         }else if segue.identifier == "sgSlide"{
             let slideController = segue.destination as! SlideCountController
-            if tfTaget.text != "" && swTarget.isOn{
-                slideController.targetValue = tfTaget.text
-            }
-            slideController.vibrate = swVibrate.isOn 
             slideController.modalPresentationStyle = .fullScreen
         }
     }

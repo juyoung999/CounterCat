@@ -8,7 +8,7 @@
 import UIKit
 import AudioToolbox
 
-class ViewController: UIViewController, CountSettingDelegate{
+class ViewController: UIViewController {
     
     var vibrate : Bool!
     var targetValue : String?
@@ -25,14 +25,11 @@ class ViewController: UIViewController, CountSettingDelegate{
         }
     }
 
-    func didChangeTarget(_ controller: SettingTableViewController, target: String?) {
-        targetValue = target
+    override func viewWillAppear(_ animated: Bool) {
+        vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
+        targetValue = UserDefaults.standard.string(forKey: "targetText")
     }
-    
-    func didChangeVibrate(_ controller: SettingTableViewController, vibrate: Bool) {
-        self.vibrate = vibrate
-    }
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if vibrate{AudioServicesPlaySystemSound(1519)}
         lblCount.text = String(Int(lblCount.text!)! + 1)
@@ -52,10 +49,6 @@ class ViewController: UIViewController, CountSettingDelegate{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "sgViewSetting"{
-            let setController = segue.destination as! SettingTableViewController
-            setController.delegate = self
-        }
     }
 }
 

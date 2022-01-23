@@ -8,7 +8,7 @@
 import UIKit
 import AudioToolbox
 
-class SlideCountController: UIViewController, CountSettingDelegate{
+class SlideCountController: UIViewController{
     
     var vibrate : Bool!
     var targetValue : String?
@@ -33,7 +33,8 @@ class SlideCountController: UIViewController, CountSettingDelegate{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-      //  vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
+        vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
+        targetValue = UserDefaults.standard.string(forKey: "targetText")
     }
     
 
@@ -56,14 +57,6 @@ class SlideCountController: UIViewController, CountSettingDelegate{
            }
         }
     }
-
-    func didChangeTarget(_ controller: SettingTableViewController, target: String?) {
-        targetValue = target
-    }
-    
-    func didChangeVibrate(_ controller: SettingTableViewController, vibrate: Bool) {
-        self.vibrate = vibrate
-    }
     
     @IBAction func resetCount(sender: UIButton){
         lblCount.text = "0"
@@ -71,10 +64,6 @@ class SlideCountController: UIViewController, CountSettingDelegate{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "sgSettingSlide"{
-            let setController = segue.destination as! SettingTableViewController
-            setController.delegate = self
-        }
     }
  
 }
