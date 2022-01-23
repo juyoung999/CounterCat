@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol CountTargetDelegate{
+protocol CountSettingDelegate{
     func didChangeTarget(_ controller: SettingTableViewController, target: String?)
     func didChangeVibrate(_ controller: SettingTableViewController, vibrate: Bool)
 }
@@ -15,7 +15,7 @@ protocol CountTargetDelegate{
 class SettingTableViewController: UITableViewController {
     
     var option : String?
-    var delegate : CountTargetDelegate?
+    var delegate : CountSettingDelegate?
     @IBOutlet var pkOption: UIPickerView!
     @IBOutlet var bbtnComplete: UIBarButtonItem!
     @IBOutlet var swVibrate: UISwitch!
@@ -97,7 +97,7 @@ class SettingTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sgCountDown"{
             let countdownController = segue.destination as! CountDownViewController
-            if tfTaget.text != "" && swTarget.isOn{
+           if tfTaget.text != "" && swTarget.isOn{
                 countdownController.targetValue = tfTaget.text
             }
             countdownController.vibrate = swVibrate.isOn
@@ -107,7 +107,7 @@ class SettingTableViewController: UITableViewController {
             if tfTaget.text != "" && swTarget.isOn{
                 slideController.targetValue = tfTaget.text
             }
-            slideController.vibrate = swVibrate.isOn
+            slideController.vibrate = swVibrate.isOn 
             slideController.modalPresentationStyle = .fullScreen
         }
     }

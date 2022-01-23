@@ -8,7 +8,7 @@
 import UIKit
 import AudioToolbox
 
-class ViewController: UIViewController, CountTargetDelegate{
+class ViewController: UIViewController, CountSettingDelegate{
     
     var vibrate : Bool!
     var targetValue : String?
@@ -34,7 +34,7 @@ class ViewController: UIViewController, CountTargetDelegate{
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if vibrate{AudioServicesPlaySystemSound(1520)}
+        if vibrate{AudioServicesPlaySystemSound(1519)}
         lblCount.text = String(Int(lblCount.text!)! + 1)
         if let targetValue = targetValue {
            if lblCount.text == targetValue{

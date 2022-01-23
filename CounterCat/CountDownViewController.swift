@@ -8,7 +8,7 @@
 import UIKit
 import AudioToolbox
 
-class CountDownViewController: UIViewController {
+class CountDownViewController: UIViewController, CountSettingDelegate {
     
     var vibrate : Bool!
     var targetValue : String?
@@ -19,8 +19,6 @@ class CountDownViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        // navigationController?.setNavigationBarHidden(false, animated: true)
         stepper.transform = stepper.transform.scaledBy(x: 3.0, y: 2.5)
         vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
     }
@@ -53,6 +51,18 @@ class CountDownViewController: UIViewController {
         view.backgroundColor = UIColor.systemBackground
     }
 
+    func didChangeTarget(_ controller: SettingTableViewController, target: String?) {
+        targetValue = target
+    }
+    
+    func didChangeVibrate(_ controller: SettingTableViewController, vibrate: Bool) {
+        self.vibrate = vibrate
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sgSettingButton"{
+            let setController = segue.destination as! SettingTableViewController
+            setController.delegate = self
+        }
     }
 }

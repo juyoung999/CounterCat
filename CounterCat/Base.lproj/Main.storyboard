@@ -380,8 +380,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="iz0-E0-4fE"/>
-        <segue reference="3bp-HR-OwW"/>
+        <segue reference="EB8-nT-5sl"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
