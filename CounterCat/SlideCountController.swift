@@ -18,12 +18,6 @@ class SlideCountController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
-        addSlideGesture()
-    }
-    
-    func addSlideGesture(){
         let slideUp = UISwipeGestureRecognizer(target: self, action: #selector(SlideCountController.slideScreen(_:)))
         let slideDown = UISwipeGestureRecognizer(target: self, action: #selector(SlideCountController.slideScreen(_:)))
         slideUp.direction = UISwipeGestureRecognizer.Direction.up
@@ -34,7 +28,8 @@ class SlideCountController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
-        targetValue = UserDefaults.standard.string(forKey: "targetText")
+        UserDefaults.standard.bool(forKey: "swTargetValue") ? (targetValue = UserDefaults.standard.string(forKey: "targetText")) : (targetValue = nil)
+        UserDefaults.standard.bool(forKey: "swDarkMode") ? (overrideUserInterfaceStyle = .dark) : (overrideUserInterfaceStyle = .light)
     }
     
 

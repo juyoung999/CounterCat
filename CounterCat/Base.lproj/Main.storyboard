@@ -76,7 +76,7 @@
             <objects>
                 <tableViewController id="ghU-uS-qh5" customClass="SettingTableViewController" customModule="CounterCat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="vg5-Xf-x0h">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <sections>
@@ -200,6 +200,9 @@
                                                         </label>
                                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lGb-oN-YTS">
                                                             <rect key="frame" x="333" y="0.0" width="51" height="31"/>
+                                                            <connections>
+                                                                <action selector="changeDarkSwitch:" destination="ghU-uS-qh5" eventType="valueChanged" id="hHy-SK-vJl"/>
+                                                            </connections>
                                                         </switch>
                                                     </subviews>
                                                 </stackView>
@@ -230,13 +233,14 @@
                         <barButtonItem key="rightBarButtonItem" title="완료" id="3xr-2n-DhX">
                             <color key="tintColor" systemColor="systemGreenColor"/>
                             <connections>
-                                <action selector="setCompleteWithSender:" destination="ghU-uS-qh5" id="Pjl-3J-iih"/>
+                                <action selector="touchCompleteButtonWithSender:" destination="ghU-uS-qh5" id="Veu-Q0-tAb"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="bbtnComplete" destination="3xr-2n-DhX" id="IGf-Bz-hIj"/>
                         <outlet property="pkOption" destination="d2M-Yh-xfR" id="Aet-3U-f2x"/>
+                        <outlet property="swDarkMode" destination="lGb-oN-YTS" id="2cL-rI-cOU"/>
                         <outlet property="swTarget" destination="gfK-7Y-9We" id="a00-PG-Xdl"/>
                         <outlet property="swVibrate" destination="6eh-9v-76Y" id="Snd-fO-pNc"/>
                         <outlet property="tfTaget" destination="vsp-IZ-1An" id="hRT-dU-cMK"/>
@@ -253,11 +257,11 @@
             <objects>
                 <viewController title="countdownView" id="RQD-k8-Ocw" customClass="CountDownViewController" customModule="CounterCat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i8f-s7-lJ7">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="wwU-IO-hdU">
-                                <rect key="frame" x="16" y="249" width="382" height="344"/>
+                                <rect key="frame" x="16" y="276" width="382" height="344"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Pq1-Xv-Foj">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="179.5"/>
@@ -336,11 +340,11 @@
             <objects>
                 <viewController id="k5w-vT-YNH" customClass="SlideCountController" customModule="CounterCat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DtO-e6-ftQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="SAQ-ZL-qJz">
-                                <rect key="frame" x="16" y="331" width="382" height="180"/>
+                                <rect key="frame" x="16" y="358" width="382" height="180"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="150"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -380,7 +384,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="EB8-nT-5sl"/>
+        <segue reference="Wql-b8-YS6"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.clockwise" catalog="system" width="115" height="128"/>

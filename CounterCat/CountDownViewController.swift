@@ -20,12 +20,12 @@ class CountDownViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         stepper.transform = stepper.transform.scaledBy(x: 3.0, y: 2.5)
-        vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
     }
 
     override func viewWillAppear(_ animated: Bool) {
         vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
-        targetValue = UserDefaults.standard.string(forKey: "targetText")
+        UserDefaults.standard.bool(forKey: "swTargetValue") ? (targetValue = UserDefaults.standard.string(forKey: "targetText")) : (targetValue = nil)
+        UserDefaults.standard.bool(forKey: "swDarkMode") ? (overrideUserInterfaceStyle = .dark) : (overrideUserInterfaceStyle = .light)
     }
     
     @IBAction func updownStepper(_ sender: UIStepper) {

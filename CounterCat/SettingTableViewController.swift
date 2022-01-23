@@ -15,6 +15,7 @@ class SettingTableViewController: UITableViewController {
     @IBOutlet var swVibrate: UISwitch!
     @IBOutlet var swTarget: UISwitch!
     @IBOutlet var tfTaget: UITextField!
+    @IBOutlet var swDarkMode: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +23,8 @@ class SettingTableViewController: UITableViewController {
         swTarget.isOn = UserDefaults.standard.bool(forKey: "swTargetValue")
         tfTaget.isEnabled = UserDefaults.standard.bool(forKey: "swTargetValue")
         tfTaget.text = UserDefaults.standard.string(forKey: "targetText")
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
+        swDarkMode.isOn = UserDefaults.standard.bool(forKey: "swDarkMode")
+        UserDefaults.standard.bool(forKey: "swDarkMode") ? (overrideUserInterfaceStyle = .dark) : (overrideUserInterfaceStyle = .light)
         pkOption.selectRow(UserDefaults.standard.integer(forKey: "optionPickerRow"), inComponent: 0, animated: true)
     }
     
@@ -33,13 +33,10 @@ class SettingTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
-    @IBAction func setComplete(sender: UIBarButtonItem){
-        // self.navigationController?.popToRootViewController(animated: false)
-        //  _ = navigationController?.popViewController(animated: true)
-        
+    @IBAction func touchCompleteButton(sender: UIBarButtonItem){
         if swTarget.isOn{
             if tfTaget.text != ""{
                 UserDefaults.standard.set(tfTaget.text!, forKey: "targetText")
@@ -55,11 +52,20 @@ class SettingTableViewController: UITableViewController {
     }
     
     func popSettingView(){
-        if let select = option{
-            if select == "touch"{
+        let oldRow = UserDefaults.standard.integer(forKey: "optionPickerRow")
+        let newRow = pkOption.selectedRow(inComponent: 0)
+       
+        if oldRow != newRow{
+            UserDefaults.standard.set(pkOption.selectedRow(inComponent: 0), forKey: "optionPickerRow")
+            switch newRow{
+            case 0:
                 self.navigationController?.popToRootViewController(animated: true)
-            }else{
-                performSegue(withIdentifier: select, sender: self)
+            case 1:
+                performSegue(withIdentifier: "sgCountDown", sender: self)
+            case 2:
+                performSegue(withIdentifier: "sgSlide", sender: self)
+            default:
+                break;
             }
         }else{
             _ = navigationController?.popViewController(animated: true)
@@ -72,14 +78,16 @@ class SettingTableViewController: UITableViewController {
     
     @IBAction func changeTargetSwitch(_ sender: UISwitch){
         sender.isOn ? (tfTaget.isEnabled = true) : (tfTaget.isEnabled = false)
-        if sender.isOn == false{
-            UserDefaults.standard.set(nil, forKey: "targetText")
-        }
         UserDefaults.standard.set(sender.isOn, forKey: "swTargetValue")
     }
     
     @IBAction func changeVibrateSwitch(_ sender: UISwitch){
         UserDefaults.standard.set(sender.isOn, forKey: "swVibrateState")
+    }
+    
+    @IBAction func changeDarkSwitch(_ sender: UISwitch){
+        sender.isOn ? (overrideUserInterfaceStyle = .dark) : (overrideUserInterfaceStyle = .light)
+        UserDefaults.standard.set(sender.isOn, forKey: "swDarkMode")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -106,23 +114,6 @@ extension SettingTableViewController: UIPickerViewDelegate, UIPickerViewDataSour
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let option = ["화면터치", "버튼터치", "슬라이드"]
         return option[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        UserDefaults.standard.set(row, forKey: "optionPickerRow")
-        switch row{
-        case 0:
-            option = "touch"
-            break;
-        case 1:
-            option = "sgCountDown"
-            break;
-        case 2:
-            option = "sgSlide"
-            break;
-        default:
-            break;
-        }
     }
 }
 

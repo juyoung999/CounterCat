@@ -23,11 +23,13 @@ class ViewController: UIViewController {
         if UserDefaults.standard.bool(forKey: "swTargetValue"){
             targetValue = UserDefaults.standard.string(forKey: "targetText")
         }
+        UserDefaults.standard.bool(forKey: "swDarkMode") ? (overrideUserInterfaceStyle = .dark) : (overrideUserInterfaceStyle = .light)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         vibrate = UserDefaults.standard.bool(forKey: "swVibrateState")
-        targetValue = UserDefaults.standard.string(forKey: "targetText")
+        UserDefaults.standard.bool(forKey: "swTargetValue") ? (targetValue = UserDefaults.standard.string(forKey: "targetText")) : (targetValue = nil)
+        UserDefaults.standard.bool(forKey: "swDarkMode") ? (overrideUserInterfaceStyle = .dark) : (overrideUserInterfaceStyle = .light)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
